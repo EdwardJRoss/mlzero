@@ -1,7 +1,9 @@
 {
   "mlzero": {
     "Overview": "/",
+    "Text Data Sources": "data.html",
     "mlzero": "core.html",
-    "Title": "segment.html"
+    "Segmentation": "segment.html",
+    "N-gram language models": "ngram.html"
   }
 }

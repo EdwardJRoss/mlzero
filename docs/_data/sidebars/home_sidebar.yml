@@ -10,11 +10,17 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
+      title: Text Data Sources
+      url: data.html
+    - output: web,pdf
       title: mlzero
       url: core.html
     - output: web,pdf
-      title: Title
+      title: Segmentation
       url: segment.html
+    - output: web,pdf
+      title: N-gram language models
+      url: ngram.html
     output: web
     title: mlzero
   output: web

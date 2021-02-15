@@ -2,9 +2,42 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"tokenize_space": "01_segment.ipynb"}
+index = {"DATA_PATH": "000_data.ipynb",
+         "data_au_jobs": "000_data.ipynb",
+         "data_wine_reviews": "000_data.ipynb",
+         "data_wiki_movies": "000_data.ipynb",
+         "data_women_clothing_reviews": "000_data.ipynb",
+         "data_au_election_2019_tweets": "000_data.ipynb",
+         "data_dickens_corpus": "000_data.ipynb",
+         "GUTENBERG_DICKENS": "000_data.ipynb",
+         "RegexTokenizer": "01_segment.ipynb",
+         "tokenize_space": "01_segment.ipynb",
+         "TOKENIZE_RE": "01_segment.ipynb",
+         "tokenize_ascii": "01_segment.ipynb",
+         "ngrams": "02_ngram.ipynb",
+         "T": "02_ngram.ipynb",
+         "PAD": "02_ngram.ipynb",
+         "invert_vocab": "02_ngram.ipynb",
+         "Vocab": "02_ngram.ipynb",
+         "OOV": "02_ngram.ipynb",
+         "OOV_IDX": "02_ngram.ipynb",
+         "PAD_IDX": "02_ngram.ipynb",
+         "vocab_topn": "02_ngram.ipynb",
+         "vocab_threshold": "02_ngram.ipynb",
+         "count_ngrams": "02_ngram.ipynb",
+         "ngram_counts_to_conditional_probability": "02_ngram.ipynb",
+         "product": "02_ngram.ipynb",
+         "NaiveNgramLanguageModel": "02_ngram.ipynb",
+         "flatten_index": "02_ngram.ipynb",
+         "unflatten_index": "02_ngram.ipynb",
+         "flatten_index_range": "02_ngram.ipynb",
+         "csr_top_k_idx": "02_ngram.ipynb",
+         "SparseRowCubeTensor": "02_ngram.ipynb",
+         "NgramLanguageModel": "02_ngram.ipynb"}
 
-modules = ["segment.py"]
+modules = ["data.py",
+           "segment.py",
+           "ngram.py"]
 
 doc_url = "https://edwardjross.github.io/mlzero/"
 
