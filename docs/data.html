@@ -110,34 +110,34 @@ Taken from <a href="https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TqdmUpTo</span><span class="p">(</span><span class="n">tqdm</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Alternative Class-based version of the above.</span>
-<span class="sd">    Provides `update_to(n)` which uses `tqdm.update(delta_n)`.</span>
-<span class="sd">    Inspired by [twine#242](https://github.com/pypa/twine/pull/242),</span>
-<span class="sd">    [here](https://github.com/pypa/twine/commit/42e55e06).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<div class="output_wrapper">
+<div class="output">
 
-    <span class="k">def</span> <span class="nf">update_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        b  : int, optional</span>
-<span class="sd">            Number of blocks transferred so far [default: 1].</span>
-<span class="sd">        bsize  : int, optional</span>
-<span class="sd">            Size of each block (in tqdm units) [default: 1].</span>
-<span class="sd">        tsize  : int, optional</span>
-<span class="sd">            Total size (in tqdm units). If [default: None] remains unchanged.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">tsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">tsize</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">bsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># also sets self.n = b * bsize</span>
-</pre></div>
+<div class="output_area">
 
-    </div>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h2 id="TqdmUpTo" class="doc_header"><code>class</code> <code>TqdmUpTo</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L19" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>TqdmUpTo</code>(<strong>*<code>_</code></strong>, <strong>**<code>__</code></strong>) :: <code>tqdm</code></p>
+</blockquote>
+<p>Alternative Class-based version of the above.
+Provides <code>update_to(n)</code> which uses <code>tqdm.update(delta_n)</code>.
+Inspired by <a href="https://github.com/pypa/twine/pull/242">twine#242</a>,
+<a href="https://github.com/pypa/twine/commit/42e55e06">here</a>.</p>
+
+</div>
+
+</div>
+
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -160,7 +160,7 @@ Taken from <a href="https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fetch_dataset" class="doc_header"><code>fetch_dataset</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_dataset</code>(<strong><code>filename</code></strong>:<code>str</code>, <strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>data_loader</code></strong>=<em><code>read_csv</code></em>)</p>
+<h4 id="fetch_dataset" class="doc_header"><code>fetch_dataset</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_dataset</code>(<strong><code>filename</code></strong>:<code>str</code>, <strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>data_loader</code></strong>=<em><code>read_csv</code></em>)</p>
 </blockquote>
 <p>Loads a stored dataset, with  a progress bar</p>
 
@@ -192,7 +192,7 @@ Taken from <a href="https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="pickle_loader" class="doc_header"><code>pickle_loader</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pickle_loader</code>(<strong><code>filename</code></strong>)</p>
+<h4 id="pickle_loader" class="doc_header"><code>pickle_loader</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pickle_loader</code>(<strong><code>filename</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -236,7 +236,7 @@ Taken from <a href="https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_au_jobs" class="doc_header"><code>data_au_jobs</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_jobs</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="data_au_jobs" class="doc_header"><code>data_au_jobs</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_jobs</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Gets Australian Job Ads</p>
 <p>License: CC BY-NC-SA 4.0
@@ -1104,7 +1104,7 @@ A mirror of the CC licenced data is provided without the <code>_kaggle</code> su
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_wine_reviews" class="doc_header"><code>data_wine_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L45" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wine_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="data_wine_reviews" class="doc_header"><code>data_wine_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L66" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wine_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Retrieves Wine Reivews Data</p>
 <p>License: CC BY-NC-SA 4.0
@@ -1427,7 +1427,7 @@ See <a href="https://www.kaggle.com/zynicide/wine-reviews">https://www.kaggle.co
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_wiki_movies" class="doc_header"><code>data_wiki_movies</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wiki_movies</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="data_wiki_movies" class="doc_header"><code>data_wiki_movies</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wiki_movies</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Movie Summaries from Wikipedia</p>
 <p>License: CC BY-SA 4.0
@@ -1678,7 +1678,7 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_women_clothing_reviews" class="doc_header"><code>data_women_clothing_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_women_clothing_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="data_women_clothing_reviews" class="doc_header"><code>data_women_clothing_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_women_clothing_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Women's E-commerce Clothing Reviews</p>
 <p>License: CC0
@@ -1967,7 +1967,7 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_au_election_2019_tweets" class="doc_header"><code>data_au_election_2019_tweets</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_election_2019_tweets</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+<h4 id="data_au_election_2019_tweets" class="doc_header"><code>data_au_election_2019_tweets</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_election_2019_tweets</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Tweets from the 2019 Australian Elections</p>
 <p>Collected from Twitter API keyword search betwen 2019-05-10 and 2019-05-20.</p>

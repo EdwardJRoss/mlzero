@@ -3,6 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"DATA_PATH": "000_data.ipynb",
+         "TqdmUpTo": "000_data.ipynb",
          "fetch_dataset": "000_data.ipynb",
          "pickle_loader": "000_data.ipynb",
          "data_au_jobs": "000_data.ipynb",
