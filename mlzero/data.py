@@ -100,7 +100,7 @@ GUTENBERG_DICKENS = {
     963: 'Little Dorrit',
 }
 
-def data_dickens_corpus(data_path: Path = DATA_PATH, mirror:str="https://gutenberg.pglaf.org/") -> T.Dict[str, str]:
+def data_dickens_corpus(data_path: Path = DATA_PATH) -> T.Dict[str, str]:
     """Download a corpus of Charles Dicken's most popular books
 
     data_path: Where to store the cache
@@ -110,7 +110,7 @@ def data_dickens_corpus(data_path: Path = DATA_PATH, mirror:str="https://gutenbe
     """
     dest = data_path / 'dickens.pkl'
     if not dest.exists():
-        data = {title: strip_headers(load_etext(idx, mirror=mirror)).strip() for idx, title in GUTENBERG_DICKENS.items()}
+        data = {title: strip_headers(load_etext(idx)).strip() for idx, title in GUTENBERG_DICKENS.items()}
         with open(dest, 'wb') as f:
             pickle.dump(data, f)
     with open(dest, 'rb') as f:
