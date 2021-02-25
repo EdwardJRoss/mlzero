@@ -3,17 +3,12 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"DATA_PATH": "000_data.ipynb",
-         "fetch_from_kaggle": "000_data.ipynb",
          "fetch_dataset": "000_data.ipynb",
          "pickle_loader": "000_data.ipynb",
          "data_au_jobs": "000_data.ipynb",
-         "data_wine_reviews_kaggle": "000_data.ipynb",
          "data_wine_reviews": "000_data.ipynb",
-         "data_wiki_movies_kaggle": "000_data.ipynb",
          "data_wiki_movies": "000_data.ipynb",
-         "data_women_clothing_reviews_kaggle": "000_data.ipynb",
          "data_women_clothing_reviews": "000_data.ipynb",
-         "data_au_election_2019_tweets_kaggle": "000_data.ipynb",
          "data_au_election_2019_tweets": "000_data.ipynb",
          "data_dickens_corpus": "000_data.ipynb",
          "GUTENBERG_DICKENS": "000_data.ipynb",
