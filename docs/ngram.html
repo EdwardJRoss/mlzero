@@ -796,14 +796,14 @@ See <a href="https://skeptric.com/ngram-sentence-boundaries/">https://skeptric.c
 It needs to contain counts for each n-gram sequence of n tokens that occurs in the text.
 This is then normalised on per row on the last token:</p>
 <p>{% raw %}
-$$ P\left(w_k \vert w_{k-n+1:k-1}\right) = \frac{C\left(w_{k-n+1:n-1} w_n\right)}{C\left(w_{k-n+1:n-1}\right)} $$
+$$ P\left(w_k \vert w_{k-n+1:k-1}\night) = \frac{C\left(w_{k-n+1:n-1} w_n\night)}{C\left(w_{k-n+1:n-1}\night)} $$
 {% endraw %}</p>
 <p>Note that the denominator is precisely the sum of the numerator over all $ w_n $ in the vocabulary $ V $.</p>
 <p>{% raw %}
-$$ C\left(w_{k-n+1:n-1}\right) = \sum_{w \in V} C\left(w_{k-n+1:n-1}w\right) $$
+$$ C\left(w_{k-n+1:n-1}\night) = \sum_{w \in V} C\left(w_{k-n+1:n-1}w\night) $$
 {% endraw %}</p>
 <ul>
-<li>For calculating a probability/perplexity we need a way to fetch (log) $ P\left(w_k \vert w_{k-n+1:k-1}\right) $</li>
+<li>For calculating a probability/perplexity we need a way to fetch (log) $ P\left(w_k \vert w_{k-n+1:k-1}\night) $</li>
 <li>For generating a random sentence we need a way of fetching the minimum</li>
 </ul>
 <p>There are a number of ways we could <em>represent</em> the counts.

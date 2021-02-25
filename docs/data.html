@@ -1,6 +1,6 @@
 ---
 
-title: Text Data Sources
+title: Data Source Fetchers
 
 
 keywords: fastai
@@ -64,7 +64,49 @@ nb_path: "000_data.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="AU-Jobs:-Export-this-somewhere">AU Jobs: Export this somewhere<a class="anchor-link" href="#AU-Jobs:-Export-this-somewhere"> </a></h2><p>Data can be automatically extracted using <a href="https://github.com/EdwardJRoss/job-advert-analysis">job-advert-analysis</a>; just need somewhere suitable to store the output.</p>
+<h2 id="Kaggle">Kaggle<a class="anchor-link" href="#Kaggle"> </a></h2><p>We don't use this in CI because it requires Kaggle Credentials, but is the original source of some datasets</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="fetch_from_kaggle" class="doc_header"><code>fetch_from_kaggle</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_from_kaggle</code>(<strong><code>dataset</code></strong>:<code>str</code>, <strong><code>filename</code></strong>:<code>str</code>, <strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Loads single dataset from Kaggle, downloading if necessary.
+Requires Kaggle API credentials: <a href="https://github.com/Kaggle/kaggle-api#api-credentials">https://github.com/Kaggle/kaggle-api#api-credentials</a>
+Intermediate files are stored in data_path.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Progress Bar
+Taken from <a href="https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.py">https://github.com/tqdm/tqdm/blob/master/examples/tqdm_wget.py</a></p>
 
 </div>
 </div>
@@ -76,12 +118,69 @@ nb_path: "000_data.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">TqdmUpTo</span><span class="p">(</span><span class="n">tqdm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Alternative Class-based version of the above.</span>
+<span class="sd">    Provides `update_to(n)` which uses `tqdm.update(delta_n)`.</span>
+<span class="sd">    Inspired by [twine#242](https://github.com/pypa/twine/pull/242),</span>
+<span class="sd">    [here](https://github.com/pypa/twine/commit/42e55e06).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">update_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bsize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        b  : int, optional</span>
+<span class="sd">            Number of blocks transferred so far [default: 1].</span>
+<span class="sd">        bsize  : int, optional</span>
+<span class="sd">            Size of each block (in tqdm units) [default: 1].</span>
+<span class="sd">        tsize  : int, optional</span>
+<span class="sd">            Total size (in tqdm units). If [default: None] remains unchanged.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">tsize</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">bsize</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># also sets self.n = b * bsize</span>
 </pre></div>
 
     </div>
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>TODO: Don't allow partial/corrupted downloads</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="fetch_dataset" class="doc_header"><code>fetch_dataset</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_dataset</code>(<strong><code>filename</code></strong>:<code>str</code>, <strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>data_loader</code></strong>=<em><code>read_csv</code></em>)</p>
+</blockquote>
+<p>Loads a stored dataset, with  a progress bar</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -97,7 +196,51 @@ nb_path: "000_data.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_au_jobs" class="doc_header"><code>data_au_jobs</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_jobs</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>)</p>
+<h4 id="pickle_loader" class="doc_header"><code>pickle_loader</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>pickle_loader</code>(<strong><code>filename</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Text-Data-Sources">Text Data Sources<a class="anchor-link" href="#Text-Data-Sources"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="AU-Jobs:-Export-this-somewhere">AU Jobs: Export this somewhere<a class="anchor-link" href="#AU-Jobs:-Export-this-somewhere"> </a></h2><p>Data can be automatically extracted using <a href="https://github.com/EdwardJRoss/job-advert-analysis">job-advert-analysis</a>; just need somewhere suitable to store the output.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_au_jobs" class="doc_header"><code>data_au_jobs</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L53" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_jobs</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Gets Australian Job Ads</p>
 <p>License: CC BY-NC-SA 4.0
@@ -511,15 +654,420 @@ See <a href="https://github.com/EdwardJRoss/job-advert-analysis">https://github.
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Kaggle-datasources">Kaggle datasources<a class="anchor-link" href="#Kaggle-datasources"> </a></h2><p>These require <a href="https://github.com/Kaggle/kaggle-api#api-credentials">Kaggle's API Credentials</a> to be set up.</p>
-<p>Should probably rehost these somewhere without authentication.</p>
+<p>Should be quick on the second load</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">time</span> data_au_jobs()
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 732 ms, sys: 406 ms, total: 1.14 s
+Wall time: 1.18 s
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe tex2jax_ignore">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>title</th>
+      <th>description</th>
+      <th>uri</th>
+      <th>view_date</th>
+      <th>org</th>
+      <th>salary_raw</th>
+      <th>salary_min</th>
+      <th>salary_max</th>
+      <th>salary_hours</th>
+      <th>location_raw</th>
+      <th>loc_id</th>
+      <th>loc_continent</th>
+      <th>loc_country</th>
+      <th>loc_county</th>
+      <th>loc_empire</th>
+      <th>loc_localadmin</th>
+      <th>loc_locality</th>
+      <th>loc_macrocounty</th>
+      <th>loc_region</th>
+      <th>processor</th>
+      <th>source</th>
+      <th>loc_neighbourhood</th>
+      <th>salary_valid</th>
+      <th>salary_hours_inferred</th>
+      <th>salary_annual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Outbound phone consultant</td>
+      <td>About the Role:\nDavidson are partnered with a client that have two upcoming campaigns requiring...</td>
+      <td>https://www.davidsonwp.com/job/100562133233487/outbound-phone-consultant/</td>
+      <td>2020-06-06 06:29:05+00:00</td>
+      <td>Davidson</td>
+      <td>Competitive</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Brisbane, AU</td>
+      <td>101934019.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Brisbane</td>
+      <td>Australia</td>
+      <td>Brisbane City</td>
+      <td>Brisbane City</td>
+      <td>Brisbane</td>
+      <td>Queensland</td>
+      <td>davidsonwp</td>
+      <td>CC-MAIN-2020-24</td>
+      <td>None</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Business Analyst</td>
+      <td>About the Company\nAre you ready to start your next challenge within one of the leading financia...</td>
+      <td>https://www.davidsonwp.com/job/100562133234964/business-analyst-16/</td>
+      <td>2020-06-03 00:11:31+00:00</td>
+      <td>Davidson</td>
+      <td>Competitive</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Sydney, AU</td>
+      <td>101932003.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>New South Wales</td>
+      <td>davidsonwp</td>
+      <td>CC-MAIN-2020-24</td>
+      <td>None</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Senior Database Administrator - 3 month initial contract</td>
+      <td>About the Company\nAn opportunity to join a leading organisation working as a Database Administr...</td>
+      <td>https://www.davidsonwp.com/job/100562133234550/senior-database-administrator/</td>
+      <td>2020-05-30 20:04:38+00:00</td>
+      <td>Davidson</td>
+      <td>$100000 per annum</td>
+      <td>100000.0</td>
+      <td>NaN</td>
+      <td>2000.0</td>
+      <td>Melbourne, AU</td>
+      <td>101933229.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Melbourne</td>
+      <td>Australia</td>
+      <td>Melbourne</td>
+      <td>Melbourne</td>
+      <td>Melbourne</td>
+      <td>Victoria</td>
+      <td>davidsonwp</td>
+      <td>CC-MAIN-2020-24</td>
+      <td>None</td>
+      <td>True</td>
+      <td>2000.0</td>
+      <td>100000.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GIS Supervisor</td>
+      <td>At Davidson our vision is quite simply to change the face of the human resources and recruitment...</td>
+      <td>https://www.davidsonwp.com/job/100562133234519/gis-supervisor/</td>
+      <td>2020-06-06 07:00:26+00:00</td>
+      <td>Davidson</td>
+      <td>$70000 - $81000 per annum</td>
+      <td>70000.0</td>
+      <td>81000.0</td>
+      <td>2000.0</td>
+      <td>Moss Vale, AU</td>
+      <td>101939833.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Wingecarribee</td>
+      <td>Australia</td>
+      <td>Moss Vale</td>
+      <td>Moss Vale</td>
+      <td>Bowral - Mittagong</td>
+      <td>New South Wales</td>
+      <td>davidsonwp</td>
+      <td>CC-MAIN-2020-24</td>
+      <td>None</td>
+      <td>True</td>
+      <td>2000.0</td>
+      <td>70000.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Project Manager</td>
+      <td>The client is seeking an experienced Infrastructure Project Manager.\nThe successful candidate w...</td>
+      <td>https://www.davidsonwp.com/job/100562133233911/project-manager-27/</td>
+      <td>2020-05-28 04:26:08+00:00</td>
+      <td>Davidson</td>
+      <td>Competitive</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Brisbane, AU</td>
+      <td>101934019.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Brisbane</td>
+      <td>Australia</td>
+      <td>Brisbane City</td>
+      <td>Brisbane City</td>
+      <td>Brisbane</td>
+      <td>Queensland</td>
+      <td>davidsonwp</td>
+      <td>CC-MAIN-2020-24</td>
+      <td>None</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>73421</th>
+      <td>UX/UI Designer</td>
+      <td>Opportunity to design and deliver high quality user experience for MAAS online visitors\nTempora...</td>
+      <td>https://iworkfor.nsw.gov.au/job/ux-ui-designer-213266</td>
+      <td>2020-10-21 22:06:41+00:00</td>
+      <td>Trustees of the Museum of Applied Arts and Sciences</td>
+      <td>Salary package up to $119,200. Package includes salary ($97,152 - $107,541) employer's contribut...</td>
+      <td>97152.0</td>
+      <td>107541.0</td>
+      <td>2000.0</td>
+      <td>Sydney Region / Sydney City</td>
+      <td>101932003.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>New South Wales</td>
+      <td>iworkfornsw</td>
+      <td>CC-MAIN-2020-45</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>2000.0</td>
+      <td>97152.0</td>
+    </tr>
+    <tr>
+      <th>73422</th>
+      <td>Membership of the Independent Metropolitan Water Advisory Panel</td>
+      <td>EXPRESSIONS OF INTEREST FOR MEMBERSHIP OF THE INDEPENDENT METROPOLITAN WATER ADVISORY PANEL\nThe...</td>
+      <td>https://iworkfor.nsw.gov.au/job/membership-of-the-independent-metropolitan-water-advisory-panel-...</td>
+      <td>2020-10-21 22:46:21+00:00</td>
+      <td>Water</td>
+      <td>-</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Sydney Region / Sydney City</td>
+      <td>101932003.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>New South Wales</td>
+      <td>iworkfornsw</td>
+      <td>CC-MAIN-2020-45</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>73423</th>
+      <td>Aboriginal Identified - Clerk General Scale - Cadetship Program - Various Locations - Temporary</td>
+      <td>ABOUT LEGAL AID NSW\nLegal Aid NSW is the largest legal aid agency in Australia, comprising of a...</td>
+      <td>https://iworkfor.nsw.gov.au/job/aboriginal-identified-clerk-general-scale-cadetship-program-vari...</td>
+      <td>2020-10-21 22:35:08+00:00</td>
+      <td>Legal Aid Commission, Office of the</td>
+      <td>• Salary package of up to $27,700 including study and book allowances for a 60-day placement</td>
+      <td>27700.0</td>
+      <td>NaN</td>
+      <td>8.0</td>
+      <td>Sydney Region</td>
+      <td>101932003.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>New South Wales</td>
+      <td>iworkfornsw</td>
+      <td>CC-MAIN-2020-45</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>8.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>73424</th>
+      <td>Teacher Community Services, Orange</td>
+      <td>TAFE NSW Teacher – Community Services\n\nLocation: West Region, Orange\nPosition: Permanent Full...</td>
+      <td>https://iworkfor.nsw.gov.au/job/teacher-community-services-orange-212294</td>
+      <td>2020-10-21 21:43:25+00:00</td>
+      <td>TAFE NSW</td>
+      <td>$110,799 Package includes salary ($84,664 - $100,407), employer's contribution to superannuation...</td>
+      <td>84664.0</td>
+      <td>100407.0</td>
+      <td>2000.0</td>
+      <td>Regional NSW / Bathurst &amp; Central West NSW</td>
+      <td>102049305.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Bathurst Regional</td>
+      <td>Australia</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>New South Wales</td>
+      <td>iworkfornsw</td>
+      <td>CC-MAIN-2020-45</td>
+      <td>NaN</td>
+      <td>True</td>
+      <td>2000.0</td>
+      <td>84664.0</td>
+    </tr>
+    <tr>
+      <th>73425</th>
+      <td>Community Members, Victims Advisory Board</td>
+      <td>Community Members, Victims Advisory Board\nThe Attorney General is seeking nominations from elig...</td>
+      <td>https://iworkfor.nsw.gov.au/job/community-members-victims-advisory-board-213441</td>
+      <td>2020-10-21 22:18:16+00:00</td>
+      <td>Courts, Tribunals and Service Delivery</td>
+      <td></td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Sydney Region / Sydney City</td>
+      <td>101932003.0</td>
+      <td>Oceania</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>Sydney</td>
+      <td>New South Wales</td>
+      <td>iworkfornsw</td>
+      <td>CC-MAIN-2020-45</td>
+      <td>NaN</td>
+      <td>False</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>73426 rows × 25 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kaggle-datasources">Kaggle datasources<a class="anchor-link" href="#Kaggle-datasources"> </a></h2><p>The commands ending in <code>_kaggle</code> require <a href="https://github.com/Kaggle/kaggle-api#api-credentials">Kaggle's API Credentials</a> to be set up.
+A mirror of the CC licenced data is provided without the <code>_kaggle</code> suffix.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://www.kaggle.com/zynicide/wine-reviews">Wine Reviews</a> CC BY-NC-SA 4.0</p>
+<h3 id="Wine-Reviews"><a href="https://www.kaggle.com/zynicide/wine-reviews">Wine Reviews</a><a class="anchor-link" href="#Wine-Reviews"> </a></h3><p>CC BY-NC-SA 4.0</p>
 
 </div>
 </div>
@@ -535,7 +1083,42 @@ See <a href="https://github.com/EdwardJRoss/job-advert-analysis">https://github.
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_wine_reviews" class="doc_header"><code>data_wine_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wine_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>)</p>
+<h4 id="data_wine_reviews_kaggle" class="doc_header"><code>data_wine_reviews_kaggle</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wine_reviews_kaggle</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Retrieves Wine Reivews Data</p>
+<p>Requires Kaggle Credentials</p>
+<p>License: CC BY-NC-SA 4.0
+See <a href="https://www.kaggle.com/zynicide/wine-reviews">https://www.kaggle.com/zynicide/wine-reviews</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_wine_reviews" class="doc_header"><code>data_wine_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L73" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wine_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Retrieves Wine Reivews Data</p>
 <p>License: CC BY-NC-SA 4.0
@@ -817,8 +1400,7 @@ See <a href="https://www.kaggle.com/zynicide/wine-reviews">https://www.kaggle.co
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">Movie Summaries from Wikipedia</a>
-CC BY-SA 4.0</p>
+<h3 id="Movie-Summaries-from-Wikipedia"><a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">Movie Summaries from Wikipedia</a><a class="anchor-link" href="#Movie-Summaries-from-Wikipedia"> </a></h3><p>CC BY-SA 4.0</p>
 
 </div>
 </div>
@@ -834,7 +1416,42 @@ CC BY-SA 4.0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_wiki_movies" class="doc_header"><code>data_wiki_movies</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wiki_movies</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>)</p>
+<h4 id="data_wiki_movies_kaggle" class="doc_header"><code>data_wiki_movies_kaggle</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wiki_movies_kaggle</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Movie Summaries from Wikipedia</p>
+<p>Requires Kaggle Credentials</p>
+<p>License: CC BY-SA 4.0
+See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://www.kaggle.com/jrobischon/wikipedia-movie-plots</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_wiki_movies" class="doc_header"><code>data_wiki_movies</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_wiki_movies</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Movie Summaries from Wikipedia</p>
 <p>License: CC BY-SA 4.0
@@ -979,7 +1596,7 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
       <td>The Water Diviner</td>
       <td>Turkish</td>
       <td>Director: Russell Crowe</td>
-      <td>Director: Russell Crowe\r\nCast: Russell Crowe, Olga Kurylenko, Jai Courtney, Cem Yılmaz, Yılmaz...</td>
+      <td>Director: Russell Crowe\n\nCast: Russell Crowe, Olga Kurylenko, Jai Courtney, Cem Yılmaz, Yılmaz...</td>
       <td>unknown</td>
       <td>https://en.wikipedia.org/wiki/The_Water_Diviner</td>
       <td>The film begins in 1919, just after World War I has ended, and centres around Joshua Connor (Rus...</td>
@@ -1044,7 +1661,7 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews">Womens Clothing E-Commerce Reviews</a> CC0</p>
+<h3 id="Womens-Clothing-E-Commerce-Reviews"><a href="https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews">Womens Clothing E-Commerce Reviews</a><a class="anchor-link" href="#Womens-Clothing-E-Commerce-Reviews"> </a></h3><p>CC0</p>
 
 </div>
 </div>
@@ -1060,7 +1677,42 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_women_clothing_reviews" class="doc_header"><code>data_women_clothing_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L57" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_women_clothing_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>)</p>
+<h4 id="data_women_clothing_reviews_kaggle" class="doc_header"><code>data_women_clothing_reviews_kaggle</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L102" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_women_clothing_reviews_kaggle</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Women's E-commerce Clothing Reviews</p>
+<p>Requires Kaggle credentials</p>
+<p>License: CC0
+<a href="https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews">https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_women_clothing_reviews" class="doc_header"><code>data_women_clothing_reviews</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_women_clothing_reviews</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Women's E-commerce Clothing Reviews</p>
 <p>License: CC0
@@ -1306,8 +1958,7 @@ See <a href="https://www.kaggle.com/jrobischon/wikipedia-movie-plots">https://ww
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Tweets from AU 2019 election
-CC0</p>
+<h3 id="Tweets-from-AU-2019-election"><a href="https://www.kaggle.com/taniaj/australian-election-2019-tweets">Tweets from AU 2019 election</a><a class="anchor-link" href="#Tweets-from-AU-2019-election"> </a></h3><p>CC0</p>
 
 </div>
 </div>
@@ -1323,7 +1974,43 @@ CC0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_au_election_2019_tweets" class="doc_header"><code>data_au_election_2019_tweets</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_election_2019_tweets</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>)</p>
+<h4 id="data_au_election_2019_tweets_kaggle" class="doc_header"><code>data_au_election_2019_tweets_kaggle</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_election_2019_tweets_kaggle</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Tweets from the 2019 Australian Elections</p>
+<p>Collected from Twitter API keyword search betwen 2019-05-10 and 2019-05-20.</p>
+<p>Requires Kaggle credentials</p>
+<p>License: CC0: Public Domain
+See <a href="https://www.kaggle.com/taniaj/australian-election-2019-tweets">https://www.kaggle.com/taniaj/australian-election-2019-tweets</a></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="data_au_election_2019_tweets" class="doc_header"><code>data_au_election_2019_tweets</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L135" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_au_election_2019_tweets</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>force</code></strong>:<code>bool</code>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Tweets from the 2019 Australian Elections</p>
 <p>Collected from Twitter API keyword search betwen 2019-05-10 and 2019-05-20.</p>
@@ -1570,6 +2257,12 @@ See <a href="https://www.kaggle.com/taniaj/australian-election-2019-tweets">http
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Unimplemented">Unimplemented<a class="anchor-link" href="#Unimplemented"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Other interesting datasets (To consider):</p>
 
 </div>
@@ -1608,13 +2301,6 @@ tboyle10/medicaltranscriptions mtsamples.csv</p>
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>TODO: Build a cache</p>
-
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -1626,7 +2312,7 @@ tboyle10/medicaltranscriptions mtsamples.csv</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="data_dickens_corpus" class="doc_header"><code>data_dickens_corpus</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_dickens_corpus</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>mirror</code></strong>:<code>str</code>=<em><code>'https://gutenberg.pglaf.org/'</code></em>)</p>
+<h4 id="data_dickens_corpus" class="doc_header"><code>data_dickens_corpus</code><a href="https://github.com/edwardjross/mlzero/tree/master/mlzero/data.py#L166" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>data_dickens_corpus</code>(<strong><code>data_path</code></strong>:<code>Path</code>=<em><code>Path('/home/eross/.cache/mlzero')</code></em>, <strong><code>mirror</code></strong>:<code>str</code>=<em><code>'https://gutenberg.pglaf.org/'</code></em>)</p>
 </blockquote>
 <p>Download a corpus of Charles Dicken's most popular books</p>
 <p>data_path: Where to store the cache
@@ -1785,43 +2471,6 @@ tombstone and my sister,—Mrs. Joe Gargery, who married the blacksmith.
 As I never saw my father or my mother, and never saw any likeness of
 either of them (for their days were long before the days of
 photographs), my first fancies regarding what they 
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls -lh <span class="o">{</span>DATA_PATH<span class="o">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>total 224M
--rw-r----- 1 eross eross 129M Feb  5 14:23 au_jobs.pkl
--rw-r----- 1 eross eross  29M Jan 29 20:32 auspol2019.csv.zip
--rw-r----- 1 eross eross  18M Feb  5 14:42 dickens.pkl
--rw-r----- 1 eross eross  30M Jan 29 14:55 wiki_movie_plots_deduped.csv.zip
--rw-r----- 1 eross eross  17M Jan 29 14:47 winemag-data-130k-v2.csv.zip
--rw-r----- 1 eross eross 2.8M Jan 29 20:08 Womens%20Clothing%20E-Commerce%20Reviews.csv.zip
 </pre>
 </div>
 </div>

@@ -12,7 +12,7 @@ Not year available in pypi
 
 Work in progress
 
-```python
+```
 from mlzero.segment import tokenize_space
 
 tokenize_space('Too many badgers')
