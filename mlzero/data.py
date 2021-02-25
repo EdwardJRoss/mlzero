@@ -5,7 +5,7 @@ __all__ = ['DATA_PATH', 'fetch_dataset', 'pickle_loader', 'data_au_jobs', 'data_
 
 # Cell
 from pathlib import Path
-import pickle
+import pickle5 as pickle
 import pandas as pd
 from urllib.request import urlretrieve
 import urllib.parse
